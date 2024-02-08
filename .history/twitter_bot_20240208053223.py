@@ -1,0 +1,6 @@
+import tweepy
+
+
+token = 'AAAAAAAAAAAAAAAAAAAAAJwhsQEAAAAAildbhfcWpYCFjLgpKyXxYtHLe8I%3DEsF15VWceRCYOnIJrdOYabOYMnhTyFhrYFznhxf7QEyqC9fcud'
+access_token = '1660501566082940928-KYOuBLg6tgFQUhmbxsU9Qv6YjlUUcf'
+access_token_secret = 'Fe8YlviLv9HFoIMbr5IZALkcirEo3OfNBQipPOFYuR8aV'
