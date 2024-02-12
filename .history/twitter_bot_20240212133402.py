@@ -42,6 +42,7 @@ def tweet_text(before_texts):
             response = client.chat.completions.create(
                 model='gpt-3.5-turbo',
                 messages=[
+                    {"role": "system", "content": "こんにちは"},
                     {"role": "user", "content": f"何か豆知識を書いてください。但し{before_text}意外でお願いします。また、130文字以内でお願いします。"}
                 ]
             )

@@ -12,7 +12,7 @@ load_dotenv(dotenv_path)
 
 #openaiのAPIキーの設定
 client = OpenAI(
-    api_key=os.environ.get('API_KEY')
+    api_key='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'
 )
 
 consumer_key = os.environ.get('CONSUMER_KEY')
@@ -42,6 +42,7 @@ def tweet_text(before_texts):
             response = client.chat.completions.create(
                 model='gpt-3.5-turbo',
                 messages=[
+                    {"role": "system", "content": "こんにちは"},
                     {"role": "user", "content": f"何か豆知識を書いてください。但し{before_text}意外でお願いします。また、130文字以内でお願いします。"}
                 ]
             )
@@ -82,6 +83,6 @@ def tweet(message):
 
 for i in range(3): 
     if i < len(message_list):  
-        delete_n = [x.strip('\n') for x in message_list] 
+        delete_n = [x.strip('\n') for x in message_list] #\nを削除してツイートする。
         tweet(delete_n[i]) 
         time.sleep(10)
