@@ -83,6 +83,6 @@ def tweet(message):
 
 for i in range(3): 
     if i < len(message_list):  
-        delete_n = [x.strip('\n') for x in message_list] #\nを削除してツイートする。
+        delete_n = [x.strip('\n') for x in message_list]
         tweet(delete_n[i]) 
         time.sleep(10)

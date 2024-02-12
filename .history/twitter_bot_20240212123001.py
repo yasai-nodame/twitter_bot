@@ -1,6 +1,7 @@
 import tweepy 
 import os
 from dotenv import load_dotenv 
+import schedule 
 import time
 from openai import OpenAI
 import json
@@ -83,6 +84,5 @@ def tweet(message):
 
 for i in range(3): 
     if i < len(message_list):  
-        delete_n = [x.strip('\n') for x in message_list] #\nを削除してツイートする。
-        tweet(delete_n[i]) 
+        tweet(message_list[i]) 
         time.sleep(10)

@@ -1,6 +1,7 @@
 import tweepy 
 import os
 from dotenv import load_dotenv 
+import schedule 
 import time
 from openai import OpenAI
 import json
@@ -46,15 +47,14 @@ def tweet_text(before_texts):
                     {"role": "user", "content": f"何か豆知識を書いてください。但し{before_text}意外でお願いします。また、130文字以内でお願いします。"}
                 ]
             )
-            
-            other_text = response.choices[0].message.content
-            if other_text not in create_text_list and other_text not in other_texts:
-                other_texts.append(other_text)
+    
+            #リクエストした回数分リストに追加
+            other_texts.append(response.choices[0].message.content)
     
     for other_text in other_texts:
         if other_text not in create_text_list and other_text not in message_list:
             message_list.append(other_text)
-            
+            print(f'unique_list:{message_list}')
 
 
 tweets_file = open('tweets.txt', 'r', encoding='utf-8')
@@ -69,8 +69,9 @@ for file in tweet:
 print(f'create_text_list:{create_text_list}')
 i = 0
 
-while i<3: #ツイートの数が増えるなら i<1でいい。
+while i<3:
     tweet_text(create_text_list)
+    print(f'message_list{message_list}')
     i+=1
 
 
@@ -81,8 +82,10 @@ def tweet(message):
     except tweepy.TweepyException as e:
         print('ツイートの投稿に失敗しました',e)
 
-for i in range(3): 
-    if i < len(message_list):  
-        delete_n = [x.strip('\n') for x in message_list] #\nを削除してツイートする。
-        tweet(delete_n[i]) 
-        time.sleep(10)
+
+#test_bot.pyのコードを用いればreturn other_textで重複してないテキストを使えるためfor文である必要はない
+#最初は20秒ごとに実行していき大丈夫であれば、12時間毎にしようかなと思う。
+for i in message_list:
+    print(f'message:{i}')
+    # tweet(message)
+    # time.sleep(10)
