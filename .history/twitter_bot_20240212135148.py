@@ -34,7 +34,6 @@ create_text_list = [] #twitterで取得したツイート部分のテキスト�
 other_texts = []
 
 def tweet_text(before_texts):
-    
     #テキスト生成のリクエストを送信
     for before_text in before_texts:
         if before_text:

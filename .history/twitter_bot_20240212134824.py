@@ -34,6 +34,7 @@ create_text_list = [] #twitterで取得したツイート部分のテキスト�
 other_texts = []
 
 def tweet_text(before_texts):
+    # other_texts = []
     
     #テキスト生成のリクエストを送信
     for before_text in before_texts:
@@ -48,6 +49,10 @@ def tweet_text(before_texts):
             other_text = response.choices[0].message.content
             if other_text not in create_text_list and other_text not in other_texts:
                 other_texts.append(other_text)
+    
+    for other_text in other_texts:
+        if other_text not in create_text_list and other_text not in message_list:
+            message_list.append(other_text)
             
 
 
@@ -76,7 +81,7 @@ def tweet(message):
         print('ツイートの投稿に失敗しました',e)
 
 for i in range(3): 
-    if i < len(other_texts):  
-        delete_n = [x.strip('\n') for x in other_texts] 
+    if i < len(message_list):  
+        delete_n = [x.strip('\n') for x in message_list] 
         tweet(delete_n[i]) 
         time.sleep(10)
